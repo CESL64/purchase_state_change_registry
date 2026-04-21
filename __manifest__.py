@@ -10,7 +10,10 @@
         "purchase",
         "state_change_registry",
     ],
-    "data": [],
+    "data": [
+        "views/purchase_order_views.xml",
+        "views/state_change_registry_views.xml",
+    ],
     "installable": True,
     "application": False,
 }

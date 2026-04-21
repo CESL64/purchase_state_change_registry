@@ -4,6 +4,12 @@ from odoo import fields, models
 class PurchaseOrder(models.Model):
     _inherit = "purchase.order"
 
+    state_change_registry_ids = fields.One2many(
+        comodel_name="state.change.registry",
+        inverse_name="purchase_id",
+        string="Registros de Cambio de Estado",
+    )
+
     def write(self, vals):
         track_state = "state" in vals
         previous_states = {order.id: order.state for order in self} if track_state else {}
@@ -34,6 +40,7 @@ class PurchaseOrder(models.Model):
                 {
                     "name": order.name or order.partner_ref or str(order.id),
                     "document_type": "purchase",
+                    "purchase_id": order.id,
                     "amount": order.amount_total,
                     "line_count": len(order.order_line),
                     "tax_summary": ", ".join(sorted(set(taxes))),
