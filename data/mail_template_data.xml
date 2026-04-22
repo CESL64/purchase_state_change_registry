@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="mail_template_purchase_state_change_notification" model="mail.template">
+        <field name="name">Notificacion cambio de estado de compra</field>
+        <field name="model_id" ref="state_change_registry.model_state_change_registry"/>
+        <field name="subject">Cambio de estado en compra {{ object.purchase_id.name or object.purchase_id.display_name }}</field>
+        <field name="email_from">{{ user.email_formatted or object.company_id.email or '' }}</field>
+        <field name="body_html" type="html">
+            <div style="margin: 0; padding: 0; font-size: 13px;">
+                <p>Hola,</p>
+                <p>Se ha registrado un cambio de estado en la orden de compra <strong><t t-out="object.purchase_id.name or object.purchase_id.display_name"/></strong>.</p>
+                <p><strong>Registro:</strong> <t t-out="object.name or ''"/></p>
+                <p><strong>Fecha de cambio:</strong> <t t-out="object.change_date or ''"/></p>
+                <p><strong>Estado previo:</strong> <t t-out="object.previous_state or ''"/></p>
+                <p><strong>Estado nuevo:</strong> <t t-out="object.new_state or ''"/></p>
+                <p><strong>Monto:</strong> <t t-out="object.amount or ''"/></p>
+                <p><strong>Cantidad de lineas:</strong> <t t-out="object.line_count or ''"/></p>
+            </div>
+        </field>
+        <field name="auto_delete" eval="True"/>
+    </record>
+</odoo>
