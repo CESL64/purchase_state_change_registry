@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <menuitem
+        id="menu_purchase_state_change_registry_report_wizard"
+        name="Registros de Cambio de Estado"
+        parent="purchase.purchase_report_main"
+        action="action_purchase_state_change_registry_report_wizard"
+        sequence="30"
+    />
+</odoo>
